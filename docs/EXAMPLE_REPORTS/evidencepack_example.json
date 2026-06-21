@@ -1,0 +1,47 @@
+{
+  "benchmark": "EvidencePack/ReproGate v0",
+  "version": "1.0.0-prototype",
+  "descriptor": "proof-aware mathematical verification benchmark (evidence layer)",
+  "public_wording": "EvidencePack and ReproGate make verification results reproducible and auditable. They do not prove scientific truth; they preserve what was checked, how it was checked, and whether it can be reproduced.",
+  "mode": "Evidence v0 -- single bench: evidencebench",
+  "is_prototype": true,
+  "seed": 20260622,
+  "bench": "evidencebench",
+  "result": {
+    "bench": "evidencebench",
+    "mode": "EvidencePack v0 (reproducible, auditable evidence records)",
+    "public_wording": "EvidencePack and ReproGate make verification results reproducible and auditable. They do not prove scientific truth; they preserve what was checked, how it was checked, and whether it can be reproduced.",
+    "seed": 20260622,
+    "n_cases": 25,
+    "status_tally": {
+      "EVIDENCE_PACK_CREATED": 25
+    },
+    "results": [
+      {
+        "pack_id": "ev_unit_pc1",
+        "gate_name": "UnitGate",
+        "status": "DIMENSIONALLY_VALID",
+        "integrity_status": "EVIDENCE_PACK_CREATED",
+        "certificate_hash": "5a463b3447e6fb02...",
+        "evidence_pack_hash": "ccf34b3c6ec9fb34...",
+        "hashes_stable": true,
+        "contamination_status": "clean",
+        "repro_command": "python -m proofbench_x run --physics --bench unitgate --json --seed 20260622",
+        "human_readable_summary": "UnitGate on 'F = m * a (Newton's 2nd law)': DIMENSIONALLY_VALID (lhs=M*L*T^-2, rhs=M*L*T^-2)"
+      }
+    ],
+    "score": {
+      "name": "Evidence Pack Score",
+      "value": 1.0,
+      "n": 25,
+      "detail": "25/25 packs have stable cert + pack hashes across reruns"
+    }
+  },
+  "score": {
+    "name": "Evidence Pack Score",
+    "value": 1.0,
+    "n": 25,
+    "detail": "25/25 packs have stable cert + pack hashes across reruns"
+  },
+  "_NOTE": "PROTOTYPE example output, trimmed. Re-run in the real repo for full results; not an official benchmark number."
+}

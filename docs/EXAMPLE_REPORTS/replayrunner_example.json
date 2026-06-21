@@ -1,0 +1,71 @@
+{
+  "benchmark": "ReplayRunner v0",
+  "version": "1.0.0-prototype",
+  "descriptor": "proof-aware mathematical verification benchmark (replay layer)",
+  "public_wording": "ReplayRunner executes evidence-pack repro commands and checks whether results reproduce. It does not prove scientific truth; it verifies whether a recorded verification result can be replayed without drift.",
+  "mode": "ReplayRunner v0 -- single bench: replaybench",
+  "is_prototype": true,
+  "seed": 20260622,
+  "bench": "replaybench",
+  "result": {
+    "bench": "replaybench",
+    "mode": "ReplayBench v0 (execute + audit evidence-pack replays)",
+    "public_wording": "ReplayRunner executes evidence-pack repro commands and checks whether results reproduce. It does not prove scientific truth; it verifies whether a recorded verification result can be replayed without drift.",
+    "seed": 20260622,
+    "n_cases": 7,
+    "status_tally": {
+      "REPRODUCIBLE": 2,
+      "MISSING_REPRO_COMMAND": 1,
+      "REPLAY_COMMAND_FAILED": 1,
+      "REPLAY_TIMEOUT": 1,
+      "UNVERIFIABLE_ARTIFACT": 1,
+      "DRIFT_DETECTED": 1
+    },
+    "results": [
+      {
+        "pack_id": "ev_unit_pc1",
+        "verdict": "REPRODUCIBLE",
+        "exit_code": 0,
+        "runtime_ms": 180,
+        "stdout_preview": "{\n  \"benchmark\": \"PhysicsGate v0\",\n  \"version\": \"1.0.0-prototype\",\n  \"descriptor\": \"proof-aware mathematical verification benchmark (physics layer)\",\n  \"mode\": \"PhysicsGate -- single bench: unitgate\",\n  \"is_prototype\": true,\n  \"seed\": 20260624,\n  \"bench\": \"unitgate\",\n  \"result\": {\n    \"bench\": \"physics_unitgate\",\n    \"mode\": \"Dimensional analysis (exact rational exponents, no floats)\",\n    \"public_wording\": \"PhysicsGate checks mathematical and dimensional coherence of physics claims. It does not",
+        "stderr_preview": "",
+        "repro_result": {
+          "verdict": "REPRODUCIBLE",
+          "matched_fields": [
+            "normalized_input",
+            "gate_name",
+            "gate_version",
+            "verifier_version",
+            "seed",
+            "status",
+            "certificate_hash",
+            "result_body",
+            "contamination_status"
+          ],
+          "mismatched_fields": [],
+          "missing_fields": [],
+          "note": "all 9 required fields match"
+        },
+        "note": "all 9 required fields match",
+        "id": "rlb1",
+        "description": "valid UnitGate evidence pack replay -> REPRODUCIBLE",
+        "expected_verdict": "REPRODUCIBLE",
+        "self_consistent": true,
+        "why": "replaying the unitgate bench should reproduce the same certificate"
+      }
+    ],
+    "score": {
+      "name": "Replay Bench Score",
+      "value": 1.0,
+      "n": 7,
+      "detail": "7/7 replay cases correct"
+    }
+  },
+  "score": {
+    "name": "Replay Bench Score",
+    "value": 1.0,
+    "n": 7,
+    "detail": "7/7 replay cases correct"
+  },
+  "_NOTE": "PROTOTYPE example output, trimmed. Re-run in the real repo for full results; not an official benchmark number."
+}

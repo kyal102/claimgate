@@ -1,0 +1,53 @@
+{
+  "benchmark": "ClaimGate v0",
+  "public_wording": "ClaimGate extracts and routes scientific claims to verification gates. It does not prove scientific truth; it records which claims were checked, which failed, which need evidence, and which require simulation or experiment.",
+  "report": {
+    "original_text": "Energy equals mass times acceleration and proves a new gravity effect that saves 90% power.",
+    "extracted_claims": [
+      {
+        "claim_id": "claim_000",
+        "raw_text": "Energy equals mass times acceleration",
+        "claim_type": "physics_claim",
+        "normalized_input": "energy equals mass times acceleration",
+        "routed_gate": "UnitGate",
+        "gate_status": "DIMENSIONALLY_INVALID",
+        "evidence_pack_id": "ev_claim_claim_000",
+        "certificate_hash": "ee5d7d48e63904ca6a431052880b0f3e81a3a9ba73e0f7e8f300bb81c8b1a9c4",
+        "limitation": "UnitGate checks dimensional consistency only",
+        "next_required_validation": "proceed to PhysicsClaimBench if applicable"
+      },
+      {
+        "claim_id": "claim_001",
+        "raw_text": "proves a new gravity effect",
+        "claim_type": "unsupported_claim",
+        "normalized_input": "proves a new gravity effect",
+        "routed_gate": "ClaimGate",
+        "gate_status": "UNSUPPORTED_CLAIM",
+        "evidence_pack_id": "ev_claim_claim_001",
+        "certificate_hash": "41d57e173363b2ff0a040a138cc1e49f4776915f3ac52f0b62ecba3dc24f1735",
+        "limitation": "unsupported claims are never upgraded to truth",
+        "next_required_validation": "provide evidence, equations, or falsifiable predictions"
+      },
+      {
+        "claim_id": "claim_002",
+        "raw_text": "saves 90% power",
+        "claim_type": "experimental_claim",
+        "normalized_input": "saves 90% power",
+        "routed_gate": "ExperimentalGate",
+        "gate_status": "NEEDS_DATA",
+        "evidence_pack_id": "ev_claim_claim_002",
+        "certificate_hash": "268abfb2070ada207186bc6fcd3f0065b05116fb096d14457c5edfeea817d6aa",
+        "limitation": "experimental claims require data or experiment; ClaimGate does not verify experimental results",
+        "next_required_validation": "provide the benchmark dataset and data_hash backing the quantitative claim"
+      }
+    ],
+    "summary": "Extracted 3 claim(s): 0 passed, 1 failed, 2 need evidence/clarification. ClaimGate routes claims; gates decide verdicts.",
+    "n_claims": 3,
+    "n_evidence_packs": 3,
+    "status_tally": {
+      "DIMENSIONALLY_INVALID": 1,
+      "UNSUPPORTED_CLAIM": 1,
+      "NEEDS_DATA": 1
+    }
+  }
+}

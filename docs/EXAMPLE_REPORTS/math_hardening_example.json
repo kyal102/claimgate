@@ -1,0 +1,66 @@
+{
+  "benchmark": "ProofBench X Research Hardening v0",
+  "version": "1.0.0-prototype",
+  "descriptor": "proof-aware mathematical verification benchmark (hardening layer)",
+  "public_wording": "ProofBench X Research Hardening tests whether mathematical claims survive domain assumptions, hidden conditions, counterexamples, proof-object construction, and replay. It does not prove new mathematics; it verifies what conditions are required for a claim to be trusted.",
+  "mode": "Research Hardening v0 (domain + assumption + witness + proof objects)",
+  "is_prototype": true,
+  "seed": 20260622,
+  "total_hardening_cases": 66,
+  "result": {
+    "bench": "hardeningbench",
+    "mode": "ProofBench X Research Hardening v0",
+    "public_wording": "ProofBench X Research Hardening tests whether mathematical claims survive domain assumptions, hidden conditions, counterexamples, proof-object construction, and replay. It does not prove new mathematics; it verifies what conditions are required for a claim to be trusted.",
+    "seed": 20260622,
+    "n_cases": 66,
+    "status_tally": {
+      "CONDITIONAL_VALIDITY_REQUIRED": 5,
+      "MISSING_DOMAIN_ASSUMPTION": 1,
+      "DOMAIN_INVALID": 5,
+      "DOMAIN_VALID": 4,
+      "ASSUMPTIONS_MISSING": 7,
+      "CONDITIONALLY_VALID": 16,
+      "REFUTED_BY_COUNTEREXAMPLE": 7,
+      "NO_COUNTEREXAMPLE_FOUND_IN_RANGE": 1,
+      "PASS": 7,
+      "FAIL": 2,
+      "CONDITIONAL": 1,
+      "UNKNOWN": 10
+    },
+    "scores": [
+      {
+        "name": "Domain Discipline Score",
+        "value": 1.0,
+        "n": 15,
+        "detail": "15/15 domain cases correct"
+      }
+    ],
+    "results": [
+      {
+        "id": "dc1",
+        "category": "domain_sensitive_simplification",
+        "expression": "x/x = 1",
+        "declared_domain": "real",
+        "required_domain": "nonzero",
+        "verdict": "CONDITIONAL_VALIDITY_REQUIRED",
+        "expected_verdict": "CONDITIONAL_VALIDITY_REQUIRED",
+        "self_consistent": true,
+        "note": "domain 'real' is a superset of required 'nonzero' -> conditionally valid",
+        "why": "x/x=1 needs nonzero domain; real is a superset"
+      }
+    ],
+    "score": {
+      "name": "Overall Research Hardening Score",
+      "value": 1.0,
+      "n": 5,
+      "detail": "average of 5 sub-scores: 1.0000"
+    }
+  },
+  "score": {
+    "name": "Overall Research Hardening Score",
+    "value": 1.0,
+    "n": 5,
+    "detail": "average of 5 sub-scores: 1.0000"
+  },
+  "_NOTE": "PROTOTYPE example output, trimmed. Re-run in the real repo for full results; not an official benchmark number."
+}

@@ -1,0 +1,112 @@
+name: Claim Infrastructure Gate (Phase 1)
+
+# Phase 1 CI for the verified-claim infrastructure (proofbench_x).
+# Fails the build on: syntax errors, anti-cheat regressions, a sub-1.0 ReplayBench,
+# any shell=True, or ClaimGate no longer refusing unsupported/open-problem claims.
+# Production regression is covered by the existing Production Release Gate
+# (scripts/verify.py fast); this gate is additive and claim-infra-focused.
+
+on:
+  pull_request:
+    paths:
+      - "proofbench_x/**"
+      - "tests/test_proofbench_x.py"
+      - ".github/workflows/claim-infra-gate.yml"
+  push:
+    branches:
+      - main
+      - "feat/verified-claim-infrastructure"
+
+permissions:
+  contents: read
+
+jobs:
+  claim-infra-gate:
+    name: claim_infra syntax, anti-cheat, replay & refusal safety
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+
+      - name: Syntax — compile all claim_infra modules
+        run: |
+          python -m proofbench_x syntax
+          python -m proofbench_x selftest
+
+      - name: No shell=True anywhere in claim_infra
+        run: |
+          if grep -rn "shell=True" proofbench_x --include="*.py"; then
+            echo "::error::shell=True found in claim_infra"; exit 1
+          fi
+          echo "ok: 0 shell=True"
+
+      - name: Research-grade anti-cheat tests
+        run: python -m pytest tests/test_proofbench_x.py -q
+
+      - name: ReplayBench must be fully green (score == 1.0)
+        run: |
+          python - <<'PY'
+          from proofbench_x.core.replay.replaybench import run_replaybench
+          r = run_replaybench()
+          assert r["n_cases"] == 7, r["n_cases"]
+          assert r["score"]["value"] == 1.0, f"ReplayBench not green: {r['score']}"
+          print("ok: ReplayBench 7/7 = 1.0")
+          PY
+
+      - name: ClaimGate safety smoke — open problems must be refused
+        run: |
+          python - <<'PY'
+          from proofbench_x.core.claimgate import generate_report
+          rep = generate_report("I have proven the Riemann Hypothesis.")
+          statuses = [c.gate_status for c in rep.extracted_claims]
+          assert "UNSUPPORTED_CLAIM" in statuses, statuses
+          assert not any(s in ("PASS", "VERIFIED", "PROVED", "PROVEN") for s in statuses), statuses
+          print("ok: ClaimGate refuses 'proven Riemann Hypothesis' as UNSUPPORTED_CLAIM")
+          PY
+
+  claim-infra-full-suite:
+    name: Phase 2 — full proofbench/physics/theory/evidence/replay/claim suite
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    # Heavier full-suite run: on main pushes and manual dispatch (not every PR).
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+      - name: Run every layer + assert safety invariants
+        run: |
+          python - <<'PY'
+          import json, subprocess, sys
+          layers = {"v1":"--v1","v2":"--v2","physics":"--physics","theory":"--theory",
+                    "math_hardening":"--math-hardening","evidence":"--evidence",
+                    "repro":"--repro","replay":"--replay","claim":"--claim"}
+          for name, flag in layers.items():
+              r = subprocess.run([sys.executable,"-m","proofbench_x",
+                                  "run",flag,"--json"], capture_output=True, text=True)
+              assert r.returncode == 0, f"{name} exited {r.returncode}: {r.stderr[-400:]}"
+              blob = r.stdout[r.stdout.find("{"):r.stdout.rfind("}")+1]
+              d = json.loads(blob)
+              # invariant: no layer may accept a model override or claim a fake proof
+              s = json.dumps(d).lower()
+              assert "model_overrides_accepted\": 1" not in s, f"{name}: model override accepted"
+              assert "unsafe_proof" not in s or "\"unsafe_proof_claims\": 0" in s, name
+              print(f"ok: {name} ran clean")
+          print("ok: all 9 layers ran with safety invariants intact")
+          PY

@@ -1,0 +1,44 @@
+{
+  "benchmark": "PhysicsGate v0",
+  "version": "1.0.0-prototype",
+  "descriptor": "proof-aware mathematical verification benchmark (physics layer)",
+  "mode": "PhysicsGate -- single bench: unitgate",
+  "is_prototype": true,
+  "seed": 20260622,
+  "bench": "unitgate",
+  "result": {
+    "bench": "physics_unitgate",
+    "mode": "Dimensional analysis (exact rational exponents, no floats)",
+    "public_wording": "PhysicsGate checks mathematical and dimensional coherence of physics claims. It does not prove new physics or replace experiment.",
+    "seed": 20260622,
+    "n_cases": 18,
+    "deterministic_cert_hashes": true,
+    "results": [
+      {
+        "id": "pc1",
+        "statement": "F = m * a (Newton's 2nd law)",
+        "verdict": "DIMENSIONALLY_VALID",
+        "expected": "DIMENSIONALLY_VALID",
+        "self_consistent": true,
+        "lhs_dimension": "M*L*T^-2",
+        "rhs_dimension": "M*L*T^-2",
+        "note": "dimensions match: M*L*T^-2",
+        "why": "[M L T^-2] = [M] * [L T^-2] = [M L T^-2]",
+        "certificate_hash": "d7550698a4e5db2f8a4b959e2ae527d23403503f64e62a3b5159d052155a975f"
+      }
+    ],
+    "score": {
+      "name": "Unit Gate Score",
+      "value": 1.0,
+      "n": 18,
+      "detail": "18/18 unit-gate cases self-consistent"
+    }
+  },
+  "score": {
+    "name": "Unit Gate Score",
+    "value": 1.0,
+    "n": 18,
+    "detail": "18/18 unit-gate cases self-consistent"
+  },
+  "_NOTE": "PROTOTYPE example output, trimmed. Re-run in the real repo for full results; not an official benchmark number."
+}

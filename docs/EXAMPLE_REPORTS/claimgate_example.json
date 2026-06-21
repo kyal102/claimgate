@@ -1,0 +1,53 @@
+{
+  "benchmark": "ClaimGate v0",
+  "public_wording": "ClaimGate extracts and routes scientific claims to verification gates. It does not prove scientific truth; it records which claims were checked, which failed, which need evidence, and which require simulation or experiment.",
+  "report": {
+    "original_text": "The sum of 1/3 and 1/6 is 1/2. Energy E=mc^2 has units of joules. I have proven the Riemann Hypothesis.",
+    "extracted_claims": [
+      {
+        "claim_id": "claim_000",
+        "raw_text": "The sum of 1/3 and 1/6 is 1/2.",
+        "claim_type": "unsupported_claim",
+        "normalized_input": "the sum of 1/3 and 1/6 is 1/2.",
+        "routed_gate": "ClaimGate",
+        "gate_status": "UNSUPPORTED_CLAIM",
+        "evidence_pack_id": "ev_claim_claim_000",
+        "certificate_hash": "a1d27d8b8e01061506139a9fc8cb8620b75e456550c5a516c75ba68dc353e8fe",
+        "limitation": "unsupported claims are never upgraded to truth",
+        "next_required_validation": "provide evidence, equations, or falsifiable predictions"
+      },
+      {
+        "claim_id": "claim_001",
+        "raw_text": "Energy E=mc^2 has units of joules.",
+        "claim_type": "unit_claim",
+        "normalized_input": "energy e=mc^2 has units of joules.",
+        "routed_gate": "UnitGate",
+        "gate_status": "AMBIGUOUS_NEEDS_CLARIFICATION",
+        "evidence_pack_id": "ev_claim_claim_001",
+        "certificate_hash": "8d5b0f13de5427a19dada64e447362158fc4beeb2bc460cfceff5d5da15cfc59",
+        "limitation": "unknown equation form",
+        "next_required_validation": "provide a recognizable physics equation"
+      },
+      {
+        "claim_id": "claim_002",
+        "raw_text": "I have proven the Riemann Hypothesis.",
+        "claim_type": "unsupported_claim",
+        "normalized_input": "i have proven the riemann hypothesis.",
+        "routed_gate": "ClaimGate",
+        "gate_status": "UNSUPPORTED_CLAIM",
+        "evidence_pack_id": "ev_claim_claim_002",
+        "certificate_hash": "c140694f8bd48b44b8d6b84f0cd46e043de1d4c2ec9c9420b6cf2aed0b338c0f",
+        "limitation": "unsupported claims are never upgraded to truth",
+        "next_required_validation": "provide evidence, equations, or falsifiable predictions"
+      }
+    ],
+    "summary": "Extracted 3 claim(s): 0 passed, 0 failed, 3 need evidence/clarification. ClaimGate routes claims; gates decide verdicts.",
+    "n_claims": 3,
+    "n_evidence_packs": 3,
+    "status_tally": {
+      "UNSUPPORTED_CLAIM": 2,
+      "AMBIGUOUS_NEEDS_CLARIFICATION": 1
+    }
+  },
+  "_NOTE": "PROTOTYPE example output, trimmed. Re-run in the real repo for full results; not an official benchmark number."
+}

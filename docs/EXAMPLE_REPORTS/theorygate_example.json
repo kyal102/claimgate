@@ -1,0 +1,69 @@
+{
+  "benchmark": "TheoryGate v0",
+  "version": "1.0.0-prototype",
+  "descriptor": "proof-aware mathematical verification benchmark (theory layer)",
+  "public_wording": "TheoryGate checks whether a proposed physics theory is mathematically structured, dimensionally coherent, falsifiable, and prediction-bearing. It does not prove new physics or replace simulation, experiment, or peer review.",
+  "mode": "TheoryGate v0 -- single bench: theorygate",
+  "is_prototype": true,
+  "seed": 20260622,
+  "bench": "theorygate",
+  "result": {
+    "bench": "theorygate",
+    "mode": "TheoryGate pipeline (10 conservative statuses, evidence packs)",
+    "public_wording": "TheoryGate checks whether a proposed physics theory is mathematically structured, dimensionally coherent, falsifiable, and prediction-bearing. It does not prove new physics or replace simulation, experiment, or peer review.",
+    "seed": 20260622,
+    "n_cases": 10,
+    "deterministic_cert_hashes": true,
+    "status_tally": {
+      "THEORY_INCOMPLETE": 1,
+      "VARIABLES_UNDEFINED": 1,
+      "UNITS_UNDEFINED": 1,
+      "DIMENSIONALLY_INVALID": 1,
+      "NOT_FALSIFIABLE": 1,
+      "NO_TESTABLE_PREDICTION": 1,
+      "KNOWN_LIMIT_CONFLICT": 1,
+      "NEEDS_SIMULATION": 1,
+      "NEEDS_EXPERIMENT": 1,
+      "CANDIDATE_THEORY": 1
+    },
+    "results": [
+      {
+        "theory_name": "Empty Theory",
+        "raw_claim": "",
+        "category": "incomplete",
+        "parsed_variables": [],
+        "units_dimensions": {},
+        "equations_checked": [],
+        "physics_gate_result": {},
+        "known_law_checklist_result": {},
+        "falsifiability_result": {},
+        "prediction_result": {},
+        "final_status": "THEORY_INCOMPLETE",
+        "certificate_hash": "aa9bf4889822e2b1e4ac431f6323cb2a400b9e22cd9a00dc564d5a8a88625dfe",
+        "limitations": [
+          "TheoryGate is a structural check; it does not prove new physics.",
+          "Known-law checklist is declarative; TheoryGate does not re-derive physics.",
+          "CANDIDATE_THEORY means 'worth investigating', never 'proven true'.",
+          "Final validation requires simulation, experiment, or peer review."
+        ],
+        "next_required_validation": "provide theory name and raw claim",
+        "expected_final_status": "THEORY_INCOMPLETE",
+        "self_consistent": true,
+        "why": "no raw claim stated"
+      }
+    ],
+    "score": {
+      "name": "Theory Gate Score",
+      "value": 1.0,
+      "n": 10,
+      "detail": "10/10 theories routed to correct final status"
+    }
+  },
+  "score": {
+    "name": "Theory Gate Score",
+    "value": 1.0,
+    "n": 10,
+    "detail": "10/10 theories routed to correct final status"
+  },
+  "_NOTE": "PROTOTYPE example output, trimmed. Re-run in the real repo for full results; not an official benchmark number."
+}
