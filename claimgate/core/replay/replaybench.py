@@ -165,7 +165,7 @@ def _build_cases() -> list:
     pack1 = build_from_unitgate_claim(UNIT_CLAIMS[0], seed=20260624, code_hash="prototype_evidence_v0")
     # override the repro_command to target the specific bench
     pack1.repro_command = (
-        "python -m proofbench_x run --physics --bench unitgate --json --seed 20260624"
+        "python -m claimgate run --physics --bench unitgate --json --seed 20260624"
     )
     cases.append(ReplayCase("rlb1", "valid UnitGate evidence pack replay -> REPRODUCIBLE",
                             pack1, "REPRODUCIBLE",
@@ -174,7 +174,7 @@ def _build_cases() -> list:
     # 2. valid PhysicsClaimBench pack replay -> REPRODUCIBLE
     pack2 = build_from_physics_claim(PHYSICS_BENCH_CLAIMS[0], seed=20260624, code_hash="prototype_evidence_v0")
     pack2.repro_command = (
-        "python -m proofbench_x run --physics --bench physicsclaim --json --seed 20260624"
+        "python -m claimgate run --physics --bench physicsclaim --json --seed 20260624"
     )
     cases.append(ReplayCase("rlb2", "valid PhysicsClaimBench evidence pack replay -> REPRODUCIBLE",
                             pack2, "REPRODUCIBLE",
@@ -244,7 +244,7 @@ def run_replaybench(seed: int = 20260627, model=None) -> dict:
     return {
         "bench": "replaybench",
         "mode": "ReplayBench v0 (execute + audit evidence-pack replays)",
-        "public_wording": __import__("proofbench_x.core.replay.runner",
+        "public_wording": __import__("claimgate.core.replay.runner",
                                      fromlist=["PUBLIC_WORDING"]).PUBLIC_WORDING,
         "seed": seed, "n_cases": len(results),
         "status_tally": status_tally,

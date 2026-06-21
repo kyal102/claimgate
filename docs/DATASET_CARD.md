@@ -6,7 +6,7 @@
 
 Generate a holdout:
 ```
-python -m proofbench_x run --v1 --holdout --seed <new_seed> --json
+python -m claimgate run --v1 --holdout --seed <new_seed> --json
 ```
 
 ## Contaminated cases
@@ -28,5 +28,5 @@ This benchmark and its tooling were built with AI assistance. Therefore:
 A DTL-verified score is the verifier's own correctness and is not a "model" score, but it is still only *official* on an uncontaminated holdout.
 
 ## Provenance
-- Generators: `proofbench_x/core/families.py`, `core/metamorphic.py`, `core/counterexamples.py`, `core/v2/`, gate-specific bench modules.
+- Generators: `claimgate/core/families.py`, `core/metamorphic.py`, `core/counterexamples.py`, `core/v2/`, gate-specific bench modules.
 - Determinism: every case is a pure function of `(generator, seed)`; same seed ⇒ identical cases.

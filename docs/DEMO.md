@@ -9,7 +9,7 @@ AI will confidently tell you it discovered new physics. **ClaimGate** doesn't ar
 ## One command
 
 ```
-python -m proofbench_x claim "Energy equals mass times acceleration and proves a new gravity effect that saves 90% power."
+python -m claimgate claim "Energy equals mass times acceleration and proves a new gravity effect that saves 90% power."
 ```
 
 ## Real output (not a mock-up — reproduce it yourself)
@@ -35,8 +35,8 @@ The full JSON (with certificates, evidence packs, and `next_required_validation`
 ## Try your own
 
 ```
-python -m proofbench_x claim "your messy AI or human science claim here"
-python -m proofbench_x claim "your claim" --json   # full evidence packs
+python -m claimgate claim "your messy AI or human science claim here"
+python -m claimgate claim "your claim" --json   # full evidence packs
 ```
 
 ## What it is — and isn't

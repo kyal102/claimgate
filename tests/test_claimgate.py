@@ -1,5 +1,5 @@
 """Research-grade anti-cheat tests for the ported verified-claim infrastructure
-(proofbench_x).
+(claimgate).
 
 These prove the ported stack does NOT cheat:
   * the verifier RE-DERIVES truth (it is not an answer lookup),
@@ -16,15 +16,15 @@ No full-app import; imports only the additive claim_infra package.
 import random
 from pathlib import Path
 
-from proofbench_x.core.families import FAMILY_REGISTRY
-from proofbench_x.core.verifier import Verifier
-from proofbench_x.core.counterexamples import COUNTEREXAMPLES
-from proofbench_x.core.certificate import cert_hash
-from proofbench_x.core.replay.replaybench import run_replaybench
-from proofbench_x.core.claimgate import generate_report
-from proofbench_x.core.report import _check_wording
+from claimgate.core.families import FAMILY_REGISTRY
+from claimgate.core.verifier import Verifier
+from claimgate.core.counterexamples import COUNTEREXAMPLES
+from claimgate.core.certificate import cert_hash
+from claimgate.core.replay.replaybench import run_replaybench
+from claimgate.core.claimgate import generate_report
+from claimgate.core.report import _check_wording
 
-PKG = Path("proofbench_x")
+PKG = Path("claimgate")
 V = Verifier()
 
 
@@ -101,7 +101,7 @@ def test_claimgate_refuses_proven_open_problem():
 
 
 def test_stub_is_a_simulated_participant_not_the_verifier():
-    from proofbench_x.adapters import stub
+    from claimgate.adapters import stub
     doc = (stub.__doc__ or "").lower()
     assert "simulated" in doc or "weakness" in doc          # labeled simulated model
     # the verifier must not depend on the stub/model at all

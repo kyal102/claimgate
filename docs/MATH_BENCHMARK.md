@@ -7,11 +7,11 @@ A benchmark for **verified mathematical infrastructure**, not for model answers.
 ## Run it
 
 ```bash
-python -m proofbench_x run --v1 --json     # adversarial verification (395 cases)
-python -m proofbench_x run --v2 --json     # invariance & adversarial reasoning (115 cases)
-python -m proofbench_x run --v1 --bench metamorphic --json
-python -m proofbench_x run --v1 --bench counterexample --json
-python -m proofbench_x run --v1 --holdout --seed 20260622 --json   # fresh holdout
+python -m claimgate run --v1 --json     # adversarial verification (395 cases)
+python -m claimgate run --v2 --json     # invariance & adversarial reasoning (115 cases)
+python -m claimgate run --v1 --bench metamorphic --json
+python -m claimgate run --v1 --bench counterexample --json
+python -m claimgate run --v1 --holdout --seed 20260622 --json   # fresh holdout
 ```
 
 ## What it tests

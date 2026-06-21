@@ -7,7 +7,7 @@
 ![ClaimGate](social_preview.png)
 
 ```
-python -m proofbench_x claim "Energy equals mass times acceleration and proves a new gravity effect that saves 90% power."
+python -m claimgate claim "Energy equals mass times acceleration and proves a new gravity effect that saves 90% power."
 → DIMENSIONALLY_INVALID · UNSUPPORTED_CLAIM · NEEDS_DATA   (3 evidence packs, replay reproducible)
 ```
 
@@ -36,14 +36,14 @@ This is **verified-claim infrastructure**, not a model-answer leaderboard and no
 ## Run it (real repo)
 
 ```
-python -m proofbench_x selftest
-python -m proofbench_x run --v1 --json
-python -m proofbench_x run --physics --json
-python -m proofbench_x run --theory --json
-python -m proofbench_x run --math-hardening --json
-python -m proofbench_x run --evidence --json
-python -m proofbench_x run --replay --json
-python -m proofbench_x claim "paste any claim here"
+python -m claimgate selftest
+python -m claimgate run --v1 --json
+python -m claimgate run --physics --json
+python -m claimgate run --theory --json
+python -m claimgate run --math-hardening --json
+python -m claimgate run --evidence --json
+python -m claimgate run --replay --json
+python -m claimgate claim "paste any claim here"
 ```
 
 ## Honest framing — what this is NOT

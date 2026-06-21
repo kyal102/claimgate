@@ -1,6 +1,6 @@
 name: Claim Infrastructure Gate (Phase 1)
 
-# Phase 1 CI for the verified-claim infrastructure (proofbench_x).
+# Phase 1 CI for the verified-claim infrastructure (claimgate).
 # Fails the build on: syntax errors, anti-cheat regressions, a sub-1.0 ReplayBench,
 # any shell=True, or ClaimGate no longer refusing unsupported/open-problem claims.
 # Production regression is covered by the existing Production Release Gate
@@ -9,8 +9,8 @@ name: Claim Infrastructure Gate (Phase 1)
 on:
   pull_request:
     paths:
-      - "proofbench_x/**"
-      - "tests/test_proofbench_x.py"
+      - "claimgate/**"
+      - "tests/test_claimgate.py"
       - ".github/workflows/claim-infra-gate.yml"
   push:
     branches:
@@ -41,23 +41,23 @@ jobs:
 
       - name: Syntax — compile all claim_infra modules
         run: |
-          python -m proofbench_x syntax
-          python -m proofbench_x selftest
+          python -m claimgate syntax
+          python -m claimgate selftest
 
       - name: No shell=True anywhere in claim_infra
         run: |
-          if grep -rn "shell=True" proofbench_x --include="*.py"; then
+          if grep -rn "shell=True" claimgate --include="*.py"; then
             echo "::error::shell=True found in claim_infra"; exit 1
           fi
           echo "ok: 0 shell=True"
 
       - name: Research-grade anti-cheat tests
-        run: python -m pytest tests/test_proofbench_x.py -q
+        run: python -m pytest tests/test_claimgate.py -q
 
       - name: ReplayBench must be fully green (score == 1.0)
         run: |
           python - <<'PY'
-          from proofbench_x.core.replay.replaybench import run_replaybench
+          from claimgate.core.replay.replaybench import run_replaybench
           r = run_replaybench()
           assert r["n_cases"] == 7, r["n_cases"]
           assert r["score"]["value"] == 1.0, f"ReplayBench not green: {r['score']}"
@@ -67,7 +67,7 @@ jobs:
       - name: ClaimGate safety smoke — open problems must be refused
         run: |
           python - <<'PY'
-          from proofbench_x.core.claimgate import generate_report
+          from claimgate.core.claimgate import generate_report
           rep = generate_report("I have proven the Riemann Hypothesis.")
           statuses = [c.gate_status for c in rep.extracted_claims]
           assert "UNSUPPORTED_CLAIM" in statuses, statuses
@@ -98,7 +98,7 @@ jobs:
                     "math_hardening":"--math-hardening","evidence":"--evidence",
                     "repro":"--repro","replay":"--replay","claim":"--claim"}
           for name, flag in layers.items():
-              r = subprocess.run([sys.executable,"-m","proofbench_x",
+              r = subprocess.run([sys.executable,"-m","claimgate",
                                   "run",flag,"--json"], capture_output=True, text=True)
               assert r.returncode == 0, f"{name} exited {r.returncode}: {r.stderr[-400:]}"
               blob = r.stdout[r.stdout.find("{"):r.stdout.rfind("}")+1]

@@ -1,4 +1,4 @@
-"""Entry point: python -m proofbench_x"""
+"""Entry point: python -m claimgate"""
 from .cli import main
 
 if __name__ == "__main__":

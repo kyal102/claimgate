@@ -26,7 +26,7 @@
         "evidence_pack_hash": "ccf34b3c6ec9fb34...",
         "hashes_stable": true,
         "contamination_status": "clean",
-        "repro_command": "python -m proofbench_x run --physics --bench unitgate --json --seed 20260622",
+        "repro_command": "python -m claimgate run --physics --bench unitgate --json --seed 20260622",
         "human_readable_summary": "UnitGate on 'F = m * a (Newton's 2nd law)': DIMENSIONALLY_VALID (lhs=M*L*T^-2, rhs=M*L*T^-2)"
       }
     ],

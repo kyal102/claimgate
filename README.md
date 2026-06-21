@@ -9,7 +9,7 @@ AI will confidently tell you it discovered new physics. **ClaimGate** doesn't ar
 ### One command (no dependencies — pure Python stdlib)
 
 ```bash
-python -m proofbench_x claim "Energy equals mass times acceleration and proves a new gravity effect that saves 90% power."
+python -m claimgate claim "Energy equals mass times acceleration and proves a new gravity effect that saves 90% power."
 ```
 
 ### Real output (reproduce it yourself)
@@ -33,10 +33,10 @@ This does **not** prove scientific truth. It records what was checked, what fail
 ## More commands
 
 ```bash
-python -m proofbench_x selftest                  # core self-tests
-python -m proofbench_x run --physics --json      # PhysicsGate (dimensional coherence)
-python -m proofbench_x run --replay  --json      # evidence-pack replay audit
-python -m proofbench_x claim "your claim" --json # full evidence packs
+python -m claimgate selftest                  # core self-tests
+python -m claimgate run --physics --json      # PhysicsGate (dimensional coherence)
+python -m claimgate run --replay  --json      # evidence-pack replay audit
+python -m claimgate claim "your claim" --json # full evidence packs
 python -m pytest tests/ -q                        # anti-cheat tests
 ```
 
@@ -45,8 +45,8 @@ python -m pytest tests/ -q                        # anti-cheat tests
 ProofBench X is also a **math verification benchmark** — it tests whether a system can verify exact arithmetic, metamorphic equivalence, counterexamples, certificate stability and replay *without trusting a model*.
 
 ```bash
-python -m proofbench_x run --v1 --json     # 395 cases
-python -m proofbench_x run --v2 --json     # 115 cases
+python -m claimgate run --v1 --json     # 395 cases
+python -m claimgate run --v2 --json     # 115 cases
 ```
 
 The verifier's integrity scores are perfect (metamorphic, certificate stability, replay, parser, disguise, deep-chain all **1.0**); the bundled **simulated** model fails exactly where untrusted models fail (numeric slips, false identities, lost exactness). **That gap is the point.** → **[Math benchmark scoreboard](docs/MATH_BENCHMARK.md)**

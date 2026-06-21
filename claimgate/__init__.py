@@ -19,7 +19,7 @@ prototype was built blind to the real v0 internals. It therefore:
     `v0_prototype_baseline` bench is provided ONLY so the v1 machinery
     has something to compare against and to prove v0-shaped tests still
     pass. It is explicitly NOT the real v0.
-  * Does NOT write to `docs/supermath_proofbench_x/` or `Packages.html`.
+  * Does NOT write to `docs/supermath_claimgate/` or `Packages.html`.
   * Does NOT hardcode any answers in the verifier.
   * Does NOT let model outputs decide correctness.
   * Does NOT hide failures, fake proofs, or claim open problems solved.

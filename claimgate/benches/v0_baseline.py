@@ -4,8 +4,8 @@
 
 The real v0 lives in the the host project at:
     the host project's production verifier
-    docs/supermath_proofbench_x/REPORT.md
-    docs/supermath_proofbench_x/proofbench_x_results.json
+    docs/supermath_claimgate/REPORT.md
+    docs/supermath_claimgate/claimgate_results.json
 
 This sandbox could not authenticate to the the host project, so this
 file provides a MINIMAL, clearly-labeled v0-shaped baseline ONLY so the

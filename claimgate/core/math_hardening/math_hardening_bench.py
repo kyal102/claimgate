@@ -321,7 +321,7 @@ def _build_proof_object_cases() -> list:
             normal_form=normalized,
             result=result,
             evidence_pack_id="ev_" + cid,
-            replay_command=f"python -m proofbench_x run --math-hardening --bench proofobjectbench --json",
+            replay_command=f"python -m claimgate run --math-hardening --bench proofobjectbench --json",
         )
 
         # verify cert hash stability

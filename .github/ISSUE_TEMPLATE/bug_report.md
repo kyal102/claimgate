@@ -7,7 +7,7 @@ labels: bug
 
 **Command / input**
 ```
-python -m proofbench_x claim "..."
+python -m claimgate claim "..."
 ```
 
 **Expected verdict** (which gate, which status)

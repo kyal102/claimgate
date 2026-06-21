@@ -234,7 +234,7 @@ class ClaimRouter:
             limitations=[limitation, "ClaimGate routes claims; gates decide verdicts."],
             next_required_validation=next_val,
             repro_command=(
-                f"python -m proofbench_x run --claim --bench claimbench --json --seed {seed}"
+                f"python -m claimgate run --claim --bench claimbench --json --seed {seed}"
             ),
             human_readable_summary=f"{gate_name} on '{claim.raw_text[:60]}': {status}",
         )

@@ -10,10 +10,10 @@ Thanks for your interest! This project is **proof-aware verification infrastruct
 
 ## Dev loop
 ```bash
-python -m proofbench_x selftest          # core self-tests (must be 11/11)
-python -m proofbench_x syntax            # compile-check all modules (0 errors)
+python -m claimgate selftest          # core self-tests (must be 11/11)
+python -m claimgate syntax            # compile-check all modules (0 errors)
 python -m pytest tests/ -q               # anti-cheat tests (must pass)
-python -m proofbench_x run --replay --json   # ReplayBench must be 7/7
+python -m claimgate run --replay --json   # ReplayBench must be 7/7
 ```
 
 ## What CI enforces (must stay green)

@@ -1,17 +1,17 @@
 """CLI for ProofBench X v1 prototype.
 
 Examples:
-  python -m proofbench_x run --v1 --json
-  python -m proofbench_x run --v1 --bench varlane
-  python -m proofbench_x run --v1 --bench metamorphic
-  python -m proofbench_x run --v1 --bench counterexample
-  python -m proofbench_x run --v1 --bench exactstress
-  python -m proofbench_x run --v1 --bench toolrouting
-  python -m proofbench_x run --v1 --bench replay
-  python -m proofbench_x run --v1 --bench warmpower
-  python -m proofbench_x run --v1 --holdout --seed 20260622
-  python -m proofbench_x run --v0
-  python -m proofbench_x selftest
+  python -m claimgate run --v1 --json
+  python -m claimgate run --v1 --bench varlane
+  python -m claimgate run --v1 --bench metamorphic
+  python -m claimgate run --v1 --bench counterexample
+  python -m claimgate run --v1 --bench exactstress
+  python -m claimgate run --v1 --bench toolrouting
+  python -m claimgate run --v1 --bench replay
+  python -m claimgate run --v1 --bench warmpower
+  python -m claimgate run --v1 --holdout --seed 20260622
+  python -m claimgate run --v0
+  python -m claimgate selftest
 """
 from __future__ import annotations
 
@@ -461,7 +461,7 @@ def main(argv: Optional[list] = None) -> int:
         pass
 
     p = argparse.ArgumentParser(
-        prog="proofbench_x",
+        prog="claimgate",
         description=f"SuperMath ProofBench X v1 -- {__descriptor__} (prototype)",
     )
     sub = p.add_subparsers(dest="cmd")

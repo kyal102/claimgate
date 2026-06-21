@@ -69,7 +69,7 @@ def build_from_unitgate_claim(claim, seed: int = 20260624,
         ],
         next_required_validation="dimensional check complete; proceed to PhysicsClaimBench if applicable",
         repro_command=(
-            f"python -m proofbench_x run --physics --bench unitgate --json --seed {seed}"
+            f"python -m claimgate run --physics --bench unitgate --json --seed {seed}"
         ),
         human_readable_summary=(
             f"UnitGate on '{claim.statement}': {gr.verdict} "
@@ -112,7 +112,7 @@ def build_from_physics_claim(claim, seed: int = 20260624,
         ],
         next_required_validation=result.note,
         repro_command=(
-            f"python -m proofbench_x run --physics --bench physicsclaim --json --seed {seed}"
+            f"python -m claimgate run --physics --bench physicsclaim --json --seed {seed}"
         ),
         human_readable_summary=(
             f"PhysicsClaimBench on '{claim.statement}': {result.final_status}"
@@ -158,7 +158,7 @@ def build_from_theory_claim(theory, seed: int = 20260625,
         ],
         next_required_validation=pack_result.next_required_validation,
         repro_command=(
-            f"python -m proofbench_x run --theory --bench theorygate --json --seed {seed}"
+            f"python -m claimgate run --theory --bench theorygate --json --seed {seed}"
         ),
         human_readable_summary=(
             f"TheoryGate on '{theory.theory_name}': {pack_result.final_status}"

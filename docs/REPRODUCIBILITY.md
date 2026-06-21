@@ -5,24 +5,24 @@ Everything is deterministic: a run is a pure function of `(code, seed)`. Same se
 ## Run the benches (real repo)
 
 ```
-python -m proofbench_x selftest          # core self-tests
-python -m proofbench_x syntax            # compile-check all modules
-python -m proofbench_x run --v1 --json
-python -m proofbench_x run --v2 --json
-python -m proofbench_x run --math-hardening --json
-python -m proofbench_x run --physics --json
-python -m proofbench_x run --theory --json
-python -m proofbench_x run --evidence --json
-python -m proofbench_x run --repro --json
-python -m proofbench_x run --replay --json
-python -m proofbench_x run --claim --json
-python -m proofbench_x run --v1 --bench varlane --holdout --seed <new> --json
-python -m proofbench_x claim "paste a claim here"
+python -m claimgate selftest          # core self-tests
+python -m claimgate syntax            # compile-check all modules
+python -m claimgate run --v1 --json
+python -m claimgate run --v2 --json
+python -m claimgate run --math-hardening --json
+python -m claimgate run --physics --json
+python -m claimgate run --theory --json
+python -m claimgate run --evidence --json
+python -m claimgate run --repro --json
+python -m claimgate run --replay --json
+python -m claimgate run --claim --json
+python -m claimgate run --v1 --bench varlane --holdout --seed <new> --json
+python -m claimgate claim "paste a claim here"
 ```
 
 Anti-cheat tests:
 ```
-python -m pytest tests/test_proofbench_x.py -q
+python -m pytest tests/test_claimgate.py -q
 ```
 
 ## EvidencePack
