@@ -19,7 +19,7 @@ python -m claimgate claim "Energy equals mass times acceleration and proves a ne
 
 This is **verified-claim infrastructure**, not a model-answer leaderboard and not a "hardest math" benchmark. The deterministic verifier — never a model — decides correctness. A model may explain, route, or format; it can never override the verification gate.
 
-> **Prototype status.** This stack was first built in an isolated sandbox and has been ported additively into the JARVI3 repository. **Prototype benchmark numbers must be re-run inside the real repo before they are cited.** No result is leaderboard-eligible until an uncontaminated, post-implementation **holdout** is generated (see `CONTAMINATION_POLICY.md`).
+> **Prototype status.** This stack was first built in an isolated sandbox and has been ported additively into the production engine. **Prototype benchmark numbers must be re-run on the production engine before they are cited.** No result is leaderboard-eligible until an uncontaminated, post-implementation **holdout** is generated (see `CONTAMINATION_POLICY.md`).
 
 ## What's here
 

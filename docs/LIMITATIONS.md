@@ -2,7 +2,7 @@
 
 Stated plainly, because the value of this system is honesty about what it does and does not establish.
 
-- **Prototype status.** First built in an isolated sandbox, ported additively into the real JARVI3 repo. **Prototype numbers must be re-run in the real repo before they are cited.** No official benchmark status is claimed until that holds and an uncontaminated holdout exists.
+- **Prototype status.** First built in an isolated sandbox, then ported additively into the production engine. **Prototype numbers must be re-run on the production engine before they are cited.** No official benchmark status is claimed until that holds and an uncontaminated holdout exists.
 - **No new mathematics is proved.** Only closed, elementary, re-derivable math is verified. Open problems are **refused** (`UNSUPPORTED_CLAIM`), never proved.
 - **No new physics is proved.** PhysicsGate checks mathematical and dimensional coherence of physics claims. It does not prove new physics and does not replace experiment.
 - **No experimental validation.** Nothing here runs or replaces a physical experiment, lab measurement, or large-scale simulation. Claims needing those are marked `needs simulation` / `needs experiment`.

@@ -464,6 +464,8 @@ def main(argv: Optional[list] = None) -> int:
         prog="claimgate",
         description=f"SuperMath ProofBench X v1 -- {__descriptor__} (prototype)",
     )
+    p.add_argument("--demo", action="store_true",
+                   help="run a short, self-contained showcase (no arguments needed)")
     sub = p.add_subparsers(dest="cmd")
 
     run = sub.add_parser("run", help="run a benchmark")
@@ -515,6 +517,9 @@ def main(argv: Optional[list] = None) -> int:
     claim_cmd.add_argument("--seed", type=int, default=20260628, help="master seed")
 
     args = p.parse_args(argv)
+
+    if getattr(args, "demo", False) and not args.cmd:
+        return _demo()
 
     if args.cmd == "selftest":
         result = _selftest()
@@ -640,6 +645,47 @@ def main(argv: Optional[list] = None) -> int:
 
     p.print_help()
     return 2
+
+
+def _demo() -> int:
+    """Self-contained showcase: route a few claims, then run one deterministic
+    self-test, so a first-time reader sees what ClaimGate does in one command."""
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    except (AttributeError, ValueError):
+        pass
+    from .core.claimgate import generate_report, PUBLIC_WORDING
+
+    sample = (
+        "Energy = mass times acceleration. "
+        "This method proves a new law of physics. "
+        "Our optimizer saves 90% of compute. "
+        "We refactored the storage layer for clarity."
+    )
+    print("# ClaimGate demo")
+    print(f"  {PUBLIC_WORDING}")
+    print()
+    print(f"  input: {sample}")
+    print()
+    report = generate_report(sample, seed=20260628)
+    print(f"  claims extracted: {report.n_claims}  ·  evidence packs: {report.n_evidence_packs}")
+    print()
+    for c in report.extracted_claims:
+        print(f"   • [{c.claim_type}] -> {c.routed_gate}: {c.gate_status}")
+        print(f"       \"{c.raw_text[:70]}\"")
+        print(f"       pack {c.evidence_pack_id}  cert {c.certificate_hash[:16]}...")
+    print()
+    st = _selftest()
+    print(f"  verifier self-test: {st['passed']}/{st['n_checks']} checks pass"
+          f" ({'OK' if st['all_pass'] else 'FAILED'})")
+    print()
+    print("  Verdicts come from the deterministic verifier, not a model. A verdict")
+    print("  of UNSUPPORTED_CLAIM / NEEDS_DATA means a tool cannot establish it from")
+    print("  the text alone -- not that it is false. This does not prove scientific")
+    print("  truth or replace experiment, simulation or peer review.")
+    print()
+    print("  Next:  python -m claimgate claim \"E = m*c^2\"   ·   python -m claimgate selftest")
+    return 0 if st["all_pass"] else 1
 
 
 def _leaderboard_spec() -> str:

@@ -51,6 +51,25 @@ python -m claimgate run --v2 --json     # 115 cases
 
 The verifier's integrity scores are perfect (metamorphic, certificate stability, replay, parser, disguise, deep-chain all **1.0**); the bundled **simulated** model fails exactly where untrusted models fail (numeric slips, false identities, lost exactness). **That gap is the point.** → **[Math benchmark scoreboard](docs/MATH_BENCHMARK.md)**
 
+## Ecosystem
+
+ClaimGate is the front door. Each gate it routes to is also a **small, standalone,
+MIT-licensed tool** you can adopt on its own — pure stdlib, no private code:
+
+| Tool | Does | Repo |
+|------|------|------|
+| **UnitGate** | dimensional consistency of `LHS = RHS` | [kyal102/unitgate](https://github.com/kyal102/unitgate) |
+| **EvidencePack** | seal a verdict with a deterministic certificate hash | [kyal102/evidencepack](https://github.com/kyal102/evidencepack) |
+| **ReplayGate** | re-run a sealed pack, detect drift (safe `shell=False` allowlist) | [kyal102/replaygate](https://github.com/kyal102/replaygate) |
+| **ClaimLint** | lint README/docs for over-claims (CLI + GitHub Action) | [kyal102/claimlint](https://github.com/kyal102/claimlint) |
+| **ClaimStack** | end-to-end demo wiring the above into one pipeline | [kyal102/claimstack-demo](https://github.com/kyal102/claimstack-demo) |
+
+Try it in one command:
+
+```bash
+python -m claimgate --demo
+```
+
 ## What this is
 
 **ProofBench X / ClaimGate** is proof-aware verification infrastructure: exact math, symbolic invariance, counterexample witnesses, dimensional (PhysicsGate) and theory (TheoryGate) coherence checks, sealed evidence packs, drift-detecting replay, and claim extraction/routing — all decided by a deterministic verifier, never a model. Powered by the **JARVI3 / DTL** verification engine.

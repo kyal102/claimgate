@@ -1,17 +1,16 @@
 """v0 score interface hooks.
 
-The real v0 benchmark in jarvi3 defines these four scores. This module
-provides a STABLE INTERFACE for them so that:
+A full v0 benchmark defines these four scores. This module provides a STABLE
+INTERFACE for them so that:
 
   * v1 code can reference v0 scores by name without depending on v0 internals
-  * the real repo wires these hooks to its actual v0 score computation
+  * a downstream integration can wire these hooks to its actual v0 computation
   * the prototype can emit v0-shaped score records (clearly labeled as
     prototype placeholders) so the report format is complete
 
 *** These are HOOKS, not reimplementations of real v0 scoring. ***
-When integrating into the real repo, replace the placeholder logic with
-calls to the real v0 score functions. Do NOT keep the placeholder logic
-in production.
+When integrating, replace the placeholder logic with calls to the actual v0
+score functions. Do NOT keep the placeholder logic in production.
 """
 from __future__ import annotations
 
