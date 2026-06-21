@@ -1,3 +1,5 @@
+<p align="center"><img src="assets/logo.png" alt="ClaimGate" width="140"></p>
+
 # ClaimGate · ProofBench X
 
 ## Paste an AI science claim. ClaimGate checks what survives.
