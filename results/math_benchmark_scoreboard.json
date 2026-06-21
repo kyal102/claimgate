@@ -1,0 +1,28 @@
+{
+  "benchmark": "ProofBench X — Math Verification Benchmark",
+  "status": "prototype",
+  "is_prototype": true,
+  "note": "Verifier-integrity scores are the benchmark's own soundness. Model-participant scores are the BUNDLED SIMULATED stub (documented weaknesses), NOT a real model and NOT an official number. Reproduce with the commands below.",
+  "case_counts": {"v1": 395, "v2": 115},
+  "verifier_integrity": {
+    "metamorphic_equivalence": 1.0,
+    "certificate_stability": 1.0,
+    "replay_reproducibility": 1.0,
+    "parser_robustness": 1.0,
+    "disguise_resistance": 1.0,
+    "deep_chain_integrity": 1.0,
+    "holdout_determinism": 1.0,
+    "warm_lane_no_regression": 1.0
+  },
+  "simulated_stub_participant": {
+    "variant_consistency_varlane": 0.0,
+    "counterexample_rejection_v1": 0.75,
+    "counterexample_rejection_v2": 0.8,
+    "exact_preservation_v1": 0.5,
+    "exactness_v2": 0.58,
+    "tool_routing": 0.75,
+    "routing_v2": 0.7,
+    "refusal_safety_v2": 0.7
+  },
+  "interpretation": "The verifier holds (all integrity scores 1.0). The simulated model fails exactly where untrusted models fail: numeric slips, accepting plausible-but-false identities, losing exactness to scientific summaries, mis-routing, and under-refusing. That gap is the point: you do not trust a model's math, you verify it."
+}
