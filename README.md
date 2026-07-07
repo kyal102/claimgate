@@ -2,6 +2,8 @@
 
 # ClaimGate · ProofBench X
 
+[![CI](https://github.com/kyal102/claimgate/actions/workflows/ci.yml/badge.svg)](https://github.com/kyal102/claimgate/actions/workflows/ci.yml) ![license](https://img.shields.io/badge/license-MIT-green)
+
 ## Paste an AI science claim. ClaimGate checks what survives.
 
 ![ClaimGate](docs/social_preview.png)
