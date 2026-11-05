@@ -53,6 +53,8 @@ CLAIM_STATUSES = [
     "MISSING_DATA_HASH",
     "CONTAMINATED_BY_MODEL",
     "AMBIGUOUS_NEEDS_CLARIFICATION",
+    # ClaimLint CL006 (certification / compliance) — not a pass, not VALID_FORMULA.
+    "ABSTAIN",
 ]
 
 PUBLIC_WORDING = (
