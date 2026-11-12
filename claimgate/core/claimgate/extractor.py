@@ -18,6 +18,7 @@ from __future__ import annotations
 import re
 from typing import List
 
+from .compliance import peel_certification_clauses
 from .model import ExtractedClaim
 
 
@@ -104,10 +105,24 @@ def extract_claims(text: str) -> List[ExtractedClaim]:
 
 
 def _split_clauses(sentence: str) -> List[str]:
-    """Split a sentence into atomic claim clauses at connective+claim-verb
-    boundaries. A sentence with no such boundary is returned unchanged."""
+    """Split a sentence into atomic claim clauses.
+
+    Two cuts, both deterministic:
+      * a connective immediately followed by a claim verb
+        ("A equals B and proves C"), and
+      * a certification/compliance clause glued to a checkable clause
+        ("HIPAA certified and F = m*a"), so the attestation cannot inherit
+        the equation's verdict (ClaimLint CL006).
+    A sentence with neither boundary is returned unchanged.
+    """
     parts = _CLAUSE_SPLIT.split(sentence.strip())
-    return [p for p in (p.strip() for p in parts) if p]
+    out: List[str] = []
+    for part in parts:
+        part = part.strip()
+        if not part:
+            continue
+        out.extend(p for p in peel_certification_clauses(part) if p)
+    return out
 
 
 def _split_sentences(text: str) -> List[str]:

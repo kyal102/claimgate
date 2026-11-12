@@ -17,6 +17,9 @@ import hashlib
 import re
 from typing import Optional, Tuple
 
+from .compliance import (
+    CL006_RULE, CL006_VERDICT, is_certification_or_compliance_claim,
+)
 from .model import ExtractedClaim
 from ..evidence.model import EvidencePack, now_iso
 from ..evidence.builder import VERIFIER_VERSION, GATE_VERSION
@@ -193,6 +196,11 @@ class ClaimRouter:
 
     def route(self, claim: ExtractedClaim) -> EvidencePack:
         """Route a claim to the correct gate. Returns a sealed EvidencePack."""
+        # CL006 first, before type dispatch. "ISO 27001 certificate" contains
+        # "certificate" and would otherwise become REPRODUCIBLE; "ISO" / "SOC"
+        # parse as chemical formulas and would otherwise become VALID_FORMULA.
+        if is_certification_or_compliance_claim(claim.raw_text):
+            return self._route_cl006(claim)
         ct = claim.claim_type
         if ct == "math_claim":
             return self._route_math(claim)
@@ -212,7 +220,8 @@ class ClaimRouter:
     def _build_pack(self, claim: ExtractedClaim, gate_name: str,
                     status: str, result_body: dict,
                     limitation: str, next_val: str,
-                    seed: int = 20260628) -> EvidencePack:
+                    seed: int = 20260628,
+                    sub_statuses: Optional[list] = None) -> EvidencePack:
         """Build and seal an EvidencePack for a routed claim."""
         pack = EvidencePack(
             pack_id=f"ev_claim_{claim.claim_id}",
@@ -222,7 +231,7 @@ class ClaimRouter:
             raw_claim_or_input=claim.raw_text,
             normalized_input=claim.normalized_input,
             status=status,
-            sub_statuses=[],
+            sub_statuses=list(sub_statuses or []),
             result_body=result_body,
             code_hash="prototype_claimgate_v0",
             data_hash=None,
@@ -424,6 +433,34 @@ class ClaimRouter:
                                 {"claim_text": claim.raw_text},
                                 "reproducibility claims require evidence pack + replay",
                                 next_val)
+
+    def _route_cl006(self, claim: ExtractedClaim) -> EvidencePack:
+        """Certification / compliance attestation. Abstain. Never a formula pass.
+
+        ClaimLint CL006 says this wording is unroutable. The mapped ClaimGate
+        verdict is ABSTAIN: the gate will not confirm or deny the attestation.
+        VALID_FORMULA is refused even though designators such as ISO and SOC
+        are well-formed element strings.
+        """
+        return self._build_pack(
+            claim, "ClaimGate", CL006_VERDICT,
+            {
+                "claim_text": claim.raw_text,
+                "claimlint_rule": CL006_RULE,
+                "mapped_verdict": CL006_VERDICT,
+                "refused_verdicts": ["VALID_FORMULA"],
+                "reason": (
+                    "certification or compliance status is unroutable; "
+                    "a parsed formula is not a certificate"
+                ),
+            },
+            "CL006: a certification or compliance claim cannot be established "
+            "by a formula, unit, algebra, or replay check. ABSTAIN does not "
+            "confirm or deny it, and it is not VALID_FORMULA.",
+            "provide the certificate or report (body, scope, dates) for a "
+            "human to check; ClaimGate will not infer certification",
+            sub_statuses=[CL006_RULE],
+        )
 
     def _route_unsupported(self, claim: ExtractedClaim) -> EvidencePack:
         """Route unsupported claim. Never upgrade to truth."""

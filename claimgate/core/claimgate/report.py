@@ -37,7 +37,10 @@ def generate_report(text: str, seed: int = 20260628) -> ClaimReport:
     # 4. build report
     n_pass = sum(1 for c in claims if c.gate_status in ("DIMENSIONALLY_VALID", "ALGEBRAICALLY_VALID", "REPRODUCIBLE"))
     n_fail = sum(1 for c in claims if c.gate_status in ("DIMENSIONALLY_INVALID", "REFUTED_BY_COUNTEREXAMPLE", "DRIFT_DETECTED", "KNOWN_LAW_CONFLICT"))
-    n_needs = sum(1 for c in claims if c.gate_status.startswith("NEEDS_") or c.gate_status in ("UNSUPPORTED_CLAIM", "UNSUPPORTED_OPEN_CLAIM", "MISSING_DATA_HASH", "AMBIGUOUS_NEEDS_CLARIFICATION"))
+    # ABSTAIN (ClaimLint CL006) is a refusal, not a pass. VALID_FORMULA is
+    # intentionally absent from the pass set: a parsed formula is not a pass
+    # on a certification claim, and certification claims never emit it.
+    n_needs = sum(1 for c in claims if c.gate_status.startswith("NEEDS_") or c.gate_status in ("UNSUPPORTED_CLAIM", "UNSUPPORTED_OPEN_CLAIM", "MISSING_DATA_HASH", "AMBIGUOUS_NEEDS_CLARIFICATION", "ABSTAIN"))
     summary = (f"Extracted {len(claims)} claim(s): {n_pass} passed, {n_fail} failed, "
                f"{n_needs} need evidence/clarification. ClaimGate routes claims; "
                f"gates decide verdicts.")

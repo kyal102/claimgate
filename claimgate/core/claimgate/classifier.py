@@ -15,6 +15,7 @@ from __future__ import annotations
 
 from typing import List
 
+from .compliance import is_certification_or_compliance_claim
 from .model import ExtractedClaim, CLAIM_TYPES
 from .extractor import detect_claim_hints, EQUATION_PATTERN
 
@@ -32,6 +33,13 @@ def classify_claim(claim: ExtractedClaim) -> str:
     lower = text.lower()
     hints = detect_claim_hints(text)
     has_equation = bool(EQUATION_PATTERN.search(text))
+
+    # Priority 0: ClaimLint CL006. A certification or compliance attestation
+    # is unroutable. Classify it before "certificate" can look like a replay
+    # claim and before an equation in the same clause can look like math.
+    # The router turns this into ABSTAIN (not VALID_FORMULA, not a pass).
+    if is_certification_or_compliance_claim(text):
+        return "unsupported_claim"
 
     # Priority 1: unsupported broad claims
     if "unsupported" in hints:

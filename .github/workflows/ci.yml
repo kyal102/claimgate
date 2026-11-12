@@ -11,6 +11,7 @@ on:
     paths:
       - "claimgate/**"
       - "tests/test_claimgate.py"
+      - "tests/test_cl006_certification.py"
       - ".github/workflows/claim-infra-gate.yml"
   push:
     branches:
@@ -52,7 +53,7 @@ jobs:
           echo "ok: 0 shell=True"
 
       - name: Research-grade anti-cheat tests
-        run: python -m pytest tests/test_claimgate.py -q
+        run: python -m pytest tests/test_claimgate.py tests/test_cl006_certification.py -q
 
       - name: ReplayBench must be fully green (score == 1.0)
         run: |
